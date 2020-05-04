@@ -1,0 +1,107 @@
+body{
+	font-family: Roboto;
+	font-style: normal;
+	color: #333333;
+}
+.container{
+	min-height: 100%;
+	width:100%;
+}
+
+.row{
+	height: 100vh;
+
+}
+
+/*============CONTENT============*/
+
+
+
+.content{
+	min-height: 100%;
+}
+
+.content__headername{
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 28px;
+	margin: 12px 0 50px 0;
+}
+.content__title{
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 44px;
+}
+
+.content__subtitle{
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 44px;
+	margin: 0 0 43px 0;
+}
+
+.content__radiobtn{
+	
+}
+
+.content__categories{
+	margin: 13px 0 20px 0;
+}
+
+.content__btn_ctg {
+	border: 2px solid #F8F8F8;
+	box-sizing: border-box;
+	border-radius: 6px;
+}
+
+.content__btn_ctg_text {
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #ABABAB;
+}
+
+.content__radiotext{
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 26px;
+}
+
+.content__btn_getjoke{
+	background: linear-gradient(92.01deg, #8EA7FF 0%, #7291FF 100%);
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 22px;
+	color: #FFFFFF;
+	padding: 10px 40px;
+	margin: 13px 0 40px 0;
+}
+
+.content__search{
+	border: 1px solid #333333;
+	box-sizing: border-box;
+	border-radius: 10px;
+	width:100%;
+	padding: 10px 15px;
+	margin: 13px 0 7px 0;
+
+}
+
+/*===============FAVORITE==========================================*/
+
+
+
+.favorite{
+	background: #F8F8F8;
+}
+
+.favorite__headername{
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 28px;
+	color: #ABABAB;
+	margin: 12px 0 0 0;
+}
