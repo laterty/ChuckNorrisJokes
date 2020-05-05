@@ -81,7 +81,7 @@ body{
 }
 
 .content__search{
-	border: 1px solid #333333;
+	border: 2px solid #333333;
 	box-sizing: border-box;
 	border-radius: 10px;
 	width:100%;
@@ -98,7 +98,7 @@ body{
 	background: #F8F8F8;
 }
 
-.favorite__headername{
+.favorite__headername {
 	font-weight: 500;
 	font-size: 20px;
 	line-height: 28px;

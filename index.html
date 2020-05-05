@@ -19,7 +19,7 @@
 				<div class="content__title">Hey!</div>
 				<div class="content__subtitle">Let's try to find a joke for you:</div>
 				<form action="#">
-					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn">
+					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" checked>
 					<label for="random" class="content__radiotext">Random</label><br>
 					<input type="radio" id="caterogies" name="kindjokes" value="From caterogies" class="content__radiobtn">
 					<label for="caterogies" class="content__radiotext">From caterogies</label><br>
@@ -38,8 +38,42 @@
 			</div>
 			<div class="favorite col-4 offset-lg-1">
 				<div class="favorite__headername">Favorite</div>
+				<div class="btnjoke"><button id='logo'>Get a joke</button></div> 
+				<div id="data" />
 			</div>
 		</div>
 	</div>
+
+	 <script type="text/javascript">
+	 
+	    function ajax_get(url, callback) {
+		    var xmlhttp = new XMLHttpRequest();
+		    xmlhttp.onreadystatechange = function() {
+		        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		            console.log('responseText:' + xmlhttp.responseText);
+		            try {
+		                var data = JSON.parse(xmlhttp.responseText);
+		            } catch(err) {
+		                console.log(err.message + " in " + xmlhttp.responseText);
+		                return;
+		            }
+		            callback(data);
+		        }
+		    };
+		 
+		    xmlhttp.open("GET", url, true);
+		    xmlhttp.send();
+		}
+
+
+		 $("#logo").click( function() {
+		     ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
+		     	$("#data").prepend('<div class="cart">' + data["value"] + '</div>');
+		    });
+	 	});
+
+
+    
+  </script>
 </body>
 </html>
