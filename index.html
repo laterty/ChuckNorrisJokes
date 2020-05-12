@@ -20,15 +20,33 @@
 				<div class="content__subtitle">Let's try to find a joke for you:</div>
 				<form action="#">
 					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" checked>
-					<label for="random" class="content__radiotext">Random</label><br>
-					<input type="radio" id="caterogies" name="kindjokes" value="From caterogies" class="content__radiobtn">
-					<label for="caterogies" class="content__radiotext">From caterogies</label><br>
+					<label for="random" class="content__radiotext rndmrdtext">Random</label><br>
+					<input type="radio" id="ctgrs" name="kindjokes" value="From caterogies" class="content__radiobtn">
+					<label for="ctgrs" class="content__radiotext">From caterogies</label><br>
 					<div class="content__categories">
-						<button class="content__btn_ctg"><span class="content__btn_ctg_text">Animal</span></button>
-						<button class="content__btn_ctg"><span class="content__btn_ctg_text">Career</span></button>
-						<button class="content__btn_ctg"><span class="content__btn_ctg_text">Celebrity</span></button>
-						<button class="content__btn_ctg"><span class="content__btn_ctg_text">Dev</span></button>
-						<button class="content__btn_ctg"><span class="content__btn_ctg_text">More</span></button>
+						<div class="content__btn_ctg">
+							<input id="animal" type="radio" name="radio" value="1" checked>
+							<label for="animal">animal</label>
+						</div>
+						 
+						<div class="content__btn_ctg">
+							<input id="career" type="radio" name="radio" value="2">
+							<label for="career">career</label>
+						</div>
+						 
+						<div class="content__btn_ctg">
+							<input id="celebrity" type="radio" name="radio" value="3">
+							<label for="celebrity">celebrity</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="dev" type="radio" name="radio" value="4">
+							<label for="dev">dev</label>
+						</div>
+						 
+						<div class="content__btn_ctg">
+							<input id="radio-5" type="radio" name="radio" value="5">
+							<label for="radio-5">Radio button 5</label>
+						</div>
 					</div>
 					<input type="radio" id="search" name="kindjokes" value="Search" class="content__radiobtn" >
 					<label for="search" class="content__radiotext">Search</label><br>
@@ -46,6 +64,24 @@
 
 	 <script type="text/javascript">
 	 
+	 	$('#random').click(function(){
+	 		$('.content__search').css('display', 'none');
+	 		$('.content__categories').css('display', 'none');
+
+	 	});
+	 	$('#ctgrs').click(function(){
+	 		$('.content__search').css('display', 'none');
+	 		$('.content__categories').css('display', 'block');
+
+	 	});
+	 	$('#search').click(function(){
+	 		$('.content__search').css('display', 'inline-block');
+	 		$('.content__categories').css('display', 'none');
+
+	 	});
+
+
+
 	    function ajax_get(url, callback) {
 		    var xmlhttp = new XMLHttpRequest();
 		    xmlhttp.onreadystatechange = function() {

@@ -43,13 +43,10 @@ body{
 
 .content__categories{
 	margin: 13px 0 20px 0;
+	display: none;
 }
 
-.content__btn_ctg {
-	border: 2px solid #F8F8F8;
-	box-sizing: border-box;
-	border-radius: 6px;
-}
+
 
 .content__btn_ctg_text {
 	font-weight: 500;	
@@ -64,6 +61,46 @@ body{
 	font-weight: normal;
 	font-size: 18px;
 	line-height: 26px;
+}
+
+.content__btn_ctg {
+	display: inline-block;
+	margin-right: 10px;
+	font-weight: 500;
+	font-size: 12px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #ABABAB;
+
+}
+
+.content__btn_ctg input[type=radio] {
+	display: none;
+}
+
+.content__btn_ctg label {
+	display: inline-block;
+	cursor: pointer;
+	border: 2px solid #F8F8F8;
+	box-sizing: border-box;
+	border-radius: 6px;
+	user-select: none;
+	padding: 6px 15px;
+}
+
+.content__btn_ctg input[type=radio]:checked + label {
+	background: #F8F8F8;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #333333;
+}
+ 
+/* Hover */
+.content__btn_ctg label:hover {
+	color: #666;
 }
 
 .content__btn_getjoke{
@@ -90,6 +127,7 @@ body{
 	width:100%;
 	padding: 10px 15px;
 	margin: 13px 0 7px 0;
+	display: none;
 	
 }
 /*=================================JOKE==========================================================*/
@@ -184,3 +222,6 @@ body{
 	color: #ABABAB;
 	margin: 12px 0 0 0;
 }
+
+
+ 
