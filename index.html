@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row content__row">
 			<div class="content col-6 offset-lg-1">
 				<div class="content__headername" >MSI2020</div>
 				<div class="content__title">Hey!</div>
@@ -33,13 +33,13 @@
 					<input type="radio" id="search" name="kindjokes" value="Search" class="content__radiobtn" >
 					<label for="search" class="content__radiotext">Search</label><br>
 					<input type="text" class="content__search" placeholder="Free text search..."><br>
-					<button class="content__btn_getjoke">Get a joke</button>
+					<button class="content__btn_getjoke" id = "getjoke">Get a joke</button>
 				</form>
+				<div id="data">	</div>
 			</div>
 			<div class="favorite col-4 offset-lg-1">
-				<div class="favorite__headername">Favorite</div>
-				<div class="btnjoke"><button id='logo'>Get a joke</button></div> 
-				<div id="data" />
+				<div class="favorite__headername">Favorite</div> 
+				
 			</div>
 		</div>
 	</div>
@@ -66,9 +66,12 @@
 		}
 
 
-		 $("#logo").click( function() {
-		     ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
-		     	$("#data").prepend('<div class="cart">' + data["value"] + '</div>');
+
+		
+
+		 $("#getjoke").click( function() {
+		    ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
+		    	$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category" </div> </div> </div> </div>');
 		    });
 	 	});
 
@@ -77,3 +80,7 @@
   </script>
 </body>
 </html>
+
+
+
+

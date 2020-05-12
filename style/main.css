@@ -3,17 +3,14 @@ body{
 	font-style: normal;
 	color: #333333;
 }
-.container{
-	min-height: 100%;
-	width:100%;
-}
 
-.row{
+
+.content__row{
 	height: 100vh;
 
 }
 
-/*============CONTENT============*/
+/*============================CONTENT=================================*/
 
 
 
@@ -55,7 +52,7 @@ body{
 }
 
 .content__btn_ctg_text {
-	font-weight: 500;
+	font-weight: 500;	
 	font-size: 12px;
 	line-height: 16px;
 	letter-spacing: 2px;
@@ -65,7 +62,7 @@ body{
 
 .content__radiotext{
 	font-weight: normal;
-	font-size: 15px;
+	font-size: 18px;
 	line-height: 26px;
 }
 
@@ -78,6 +75,12 @@ body{
 	color: #FFFFFF;
 	padding: 10px 40px;
 	margin: 13px 0 40px 0;
+	outline:none !important;
+
+}
+
+.content__btn_getjoke:active, .content__btn_getjoke:focus, {
+	outline:none !important;
 }
 
 .content__search{
@@ -87,10 +90,86 @@ body{
 	width:100%;
 	padding: 10px 15px;
 	margin: 13px 0 7px 0;
+	
+}
+/*=================================JOKE==========================================================*/
+.joke{
+	background: #F8F8F8;
+	border-radius: 20px;
+	padding: 40px 40px 40px 100px;
+	margin: 0 0 20px 0;
+	position: relative;
+	border: 0px;
+}
+
+.joke__container{
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 26px;
+}
+
+.joke__container::before{
+	content: "";
+	background-image: url(../img/message.svg);
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left:40px;
 
 }
 
-/*===============FAVORITE==========================================*/
+.joke__idlink{
+	text-decoration: underline;
+}
+
+.joke__idlink::after{
+	content: '';
+	background-image: url(../img/link.svg);
+	height: 10px;
+	width: 10px;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.joke__id {
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 14px;
+	color: #ABABAB;
+	margin-bottom: 5px;
+}
+
+.joke__bottomrow{
+	margin-top: 20px;
+}
+
+.joke__timeupdated {
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 14px;
+	color: #ABABAB;
+}
+.joke__like{
+	text-align: right;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: flex-end;
+}
+.joke__heart{
+	width: 20px;
+	height: 17px;
+	background-image: url(../img/heart_light.svg);
+}
+
+.joke__heart:hover {
+	background-image: url(../img/heart_fill.svg);
+}
+
+/*=======================================FAVORITE===============================================*/
 
 
 
