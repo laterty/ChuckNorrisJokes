@@ -19,32 +19,32 @@
 				<div class="content__title">Hey!</div>
 				<div class="content__subtitle">Let's try to find a joke for you:</div>
 				<form action="#">
-					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" checked>
+					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" >
 					<label for="random" class="content__radiotext rndmrdtext">Random</label><br>
-					<input type="radio" id="ctgrs" name="kindjokes" value="From caterogies" class="content__radiobtn">
+					<input type="radio" id="ctgrs" name="kindjokes" value="categories" class="content__radiobtn" >
 					<label for="ctgrs" class="content__radiotext">From caterogies</label><br>
 					<div class="content__categories">
 						<div class="content__btn_ctg">
-							<input id="animal" type="radio" name="radio" value="1" checked>
+							<input id="animal" type="radio" name="ctg" value="animal" >
 							<label for="animal">animal</label>
 						</div>
 						 
 						<div class="content__btn_ctg">
-							<input id="career" type="radio" name="radio" value="2">
+							<input id="career" type="radio" name="ctg" value="career">
 							<label for="career">career</label>
 						</div>
 						 
 						<div class="content__btn_ctg">
-							<input id="celebrity" type="radio" name="radio" value="3">
+							<input id="celebrity" type="radio" name="ctg" value="celebrity">
 							<label for="celebrity">celebrity</label>
 						</div>
 						<div class="content__btn_ctg">
-							<input id="dev" type="radio" name="radio" value="4">
+							<input id="dev" type="radio" name="ctg" value="dev">
 							<label for="dev">dev</label>
 						</div>
 						 
 						<div class="content__btn_ctg">
-							<input id="radio-5" type="radio" name="radio" value="5">
+							<input id="radio-5" type="radio" name="ctg" value="5">
 							<label for="radio-5">Radio button 5</label>
 						</div>
 					</div>
@@ -99,17 +99,55 @@
 		 
 		    xmlhttp.open("GET", url, true);
 		    xmlhttp.send();
-		}
+		};
 
 
 
-		
 
-		 $("#getjoke").click( function() {
-		    ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
-		    	$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category" </div> </div> </div> </div>');
-		    });
-	 	});
+	    let rad=$('[name="kindjokes"]');
+	    let radc=$('[name="ctg"]');
+	    var kind;
+	    var catg;
+
+
+
+	    
+	    	$("#getjoke").click( function() {
+	    		for (var i = 0; i < rad.length; i++) {
+	        		if (rad[i].checked) {
+	            		kind = rad[i].value;
+	            		console.log(kind);
+	            		
+	        		}
+	    		};
+
+	    		if (kind == 'Random') {
+		    		ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
+		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category" </div> </div> </div> </div>');
+		    		});
+ 					
+ 				};
+
+ 				if (kind == 'categories') {
+	    			for (var i = 0; i < radc.length; i++) {
+	        			if (radc[i].checked) {
+	        			    catg = radc[i].value;
+	        			    console.log(catg);
+	        			    console.log(typeof(catg));
+	        			    		
+	        			};
+	    			}; 	    			
+				    	ajax_get('https://api.chucknorris.io/jokes/random?category=' + catg, function(data) {
+				    		$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category">' + catg + ' </div> </div> </div> </div>');
+						    	});
+ 						
+	    			
+	    		};
+	    	});
+
+
+
+	
 
 
     
