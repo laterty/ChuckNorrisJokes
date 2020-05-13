@@ -19,7 +19,7 @@
 				<div class="content__title">Hey!</div>
 				<div class="content__subtitle">Let's try to find a joke for you:</div>
 				<form action="#">
-					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" >
+					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" checked >
 					<label for="random" class="content__radiotext rndmrdtext">Random</label><br>
 					<input type="radio" id="ctgrs" name="kindjokes" value="categories" class="content__radiobtn" >
 					<label for="ctgrs" class="content__radiotext">From caterogies</label><br>
@@ -63,6 +63,12 @@
 	</div>
 
 	 <script type="text/javascript">
+
+	 	addEventListener("change", event => {
+	    const url = new URL(location);
+	    url.searchParams.set(event.target.name, event.target.value);
+	    history.replaceState(null, null, url);
+	});
 	 
 	 	$('#random').click(function(){
 	 		$('.content__search').css('display', 'none');
@@ -123,7 +129,7 @@
 
 	    		if (kind == 'Random') {
 		    		ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
-		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category" </div> </div> </div> </div>');
+		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div>  </div> </div> </div>');
 		    		});
  					
  				};
@@ -143,6 +149,12 @@
  						
 	    			
 	    		};
+
+	    		if (kind == 'Search') {
+	    			ajax_get(('https://api.chucknorris.io/jokes/search?query=' + $('.content__search').value ), function(data) {
+		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div>  </div> </div> </div>');
+		    		});
+	    		}
 	    	});
 
 
