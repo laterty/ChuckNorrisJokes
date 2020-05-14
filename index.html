@@ -50,7 +50,7 @@
 					</div>
 					<input type="radio" id="search" name="kindjokes" value="Search" class="content__radiobtn" >
 					<label for="search" class="content__radiotext">Search</label><br>
-					<input type="text" class="content__search" placeholder="Free text search..."><br>
+					<input type="text" class="content__search" id="pole" placeholder="Free text search..."><br>
 					<button class="content__btn_getjoke" id = "getjoke">Get a joke</button>
 				</form>
 				<div id="data">	</div>
@@ -63,13 +63,13 @@
 	</div>
 
 	 <script type="text/javascript">
-
-	 	addEventListener("change", event => {
+//=================================================================================
+	 	$('[name="ctg"], [name="kindjokes"], .content__search').change	( event => {
 	    const url = new URL(location);
 	    url.searchParams.set(event.target.name, event.target.value);
-	    history.replaceState(null, null, url);
+	    history.replaceState(null, null, url);	
 	});
-	 
+//=================================================================================
 	 	$('#random').click(function(){
 	 		$('.content__search').css('display', 'none');
 	 		$('.content__categories').css('display', 'none');
@@ -126,10 +126,12 @@
 	            		
 	        		}
 	    		};
+	    		
+
 
 	    		if (kind == 'Random') {
 		    		ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
-		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div>  </div> </div> </div>');
+		    			$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
 		    		});
  					
  				};
@@ -144,15 +146,17 @@
 	        			};
 	    			}; 	    			
 				    	ajax_get('https://api.chucknorris.io/jokes/random?category=' + catg, function(data) {
-				    		$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category">' + catg + ' </div> </div> </div> </div>');
+				    		$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href=" ${data.url} " class="joke__idlink">   ${data.id} </a></div>  ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div> <div class="joke__category"> ${catg} </div> </div> </div> </div>`);
 						    	});
  						
 	    			
 	    		};
 
 	    		if (kind == 'Search') {
-	    			ajax_get(('https://api.chucknorris.io/jokes/search?query=' + $('.content__search').value ), function(data) {
-		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div>  </div> </div> </div>');
+	    			ajax_get(('https://api.chucknorris.io/jokes/search?query=' + document.getElementById('pole').value ), function(data) {
+	    				let count = Math.floor(Math.random() * data.total);
+	    				let joke = data.result[count];
+		    			$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${joke.url} " class="joke__idlink"> ${joke.id} </a></div> ${joke.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(joke.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
 		    		});
 	    		}
 	    	});
