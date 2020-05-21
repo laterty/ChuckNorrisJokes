@@ -7,7 +7,10 @@
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="style/main.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
@@ -18,11 +21,15 @@
 				<div class="content__headername" >MSI2020</div>
 				<div class="content__title">Hey!</div>
 				<div class="content__subtitle">Let's try to find a joke for you:</div>
-				<form action="#">
-					<input type="radio" id="random" name="kindjokes" value="Random" class="content__radiobtn" >
-					<label for="random" class="content__radiotext rndmrdtext">Random</label><br>
-					<input type="radio" id="ctgrs" name="kindjokes" value="categories" class="content__radiobtn" >
-					<label for="ctgrs" class="content__radiotext">From caterogies</label><br>
+				<form action="#" id="form1">
+					<div class="content__radiobtn">
+						<input type="radio" id="random" name="kindjokes" value="Random"  checked >
+						<label for="random" class="content__radiotext rndmrdtext">Random</label><br>
+					</div>
+					<div class="content__radiobtn">
+						<input type="radio" id="ctgrs" name="kindjokes" value="categories" class="content__radiobtn" >
+						<label for="ctgrs" class="content__radiotext">From caterogies</label><br>
+					</div>
 					<div class="content__categories">
 						<div class="content__btn_ctg">
 							<input id="animal" type="radio" name="ctg" value="animal" >
@@ -44,114 +51,72 @@
 						</div>
 						 
 						<div class="content__btn_ctg">
-							<input id="radio-5" type="radio" name="ctg" value="5">
-							<label for="radio-5">Radio button 5</label>
+							<input id="explicit" type="radio" name="ctg" value="explicit">
+							<label for="explicit">explicit</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="fashion" type="radio" name="ctg" value="fashion" >
+							<label for="fashion">fashion</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="food" type="radio" name="ctg" value="food" >
+							<label for="food">food</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="history" type="radio" name="ctg" value="history" >
+							<label for="history">history</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="money" type="radio" name="ctg" value="money" >
+							<label for="money">money</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="movie" type="radio" name="ctg" value="movie" >
+							<label for="movie">movie</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="music" type="radio" name="ctg" value="music" >
+							<label for="music">music</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="political" type="radio" name="ctg" value="political" >
+							<label for="political">political</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="religion" type="radio" name="ctg" value="religion" >
+							<label for="religion">religion</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="science" type="radio" name="ctg" value="science" >
+							<label for="science">science</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="sport" type="radio" name="ctg" value="sport" >
+							<label for="sport">sport</label>
+						</div>
+						<div class="content__btn_ctg">
+							<input id="travel" type="radio" name="ctg" value="travel" >
+							<label for="travel">travel</label>
 						</div>
 					</div>
-					<input type="radio" id="search" name="kindjokes" value="Search" class="content__radiobtn" >
-					<label for="search" class="content__radiotext">Search</label><br>
-					<input type="text" class="content__search" placeholder="Free text search..."><br>
-					<button class="content__btn_getjoke" id = "getjoke">Get a joke</button>
+					<div class="content__radiobtn">
+						<input type="radio" id="search" name="kindjokes" value="Search" class="content__radiobtn" >
+						<label for="search" class="content__radiotext">Search</label><br>
+					</div>
+					<input type="text" class="content__search" id="pole" placeholder="Free text search..."><br>
+					<button type="submit" class="content__btn_getjoke" id = "getjoke" value="submit" form="form1">Get a joke</button>
 				</form>
 				<div id="data">	</div>
 			</div>
 			<div class="favorite col-4 offset-lg-1">
-				<div class="favorite__headername">Favorite</div> 
+				<div class="favorite__headername">Favorite</div>
+				<div class="favorite__container" id="data1"></div> 
 				
 			</div>
 		</div>
 	</div>
 
-	 <script type="text/javascript">
-	 
-	 	$('#random').click(function(){
-	 		$('.content__search').css('display', 'none');
-	 		$('.content__categories').css('display', 'none');
-
-	 	});
-	 	$('#ctgrs').click(function(){
-	 		$('.content__search').css('display', 'none');
-	 		$('.content__categories').css('display', 'block');
-
-	 	});
-	 	$('#search').click(function(){
-	 		$('.content__search').css('display', 'inline-block');
-	 		$('.content__categories').css('display', 'none');
-
-	 	});
-
-
-
-	    function ajax_get(url, callback) {
-		    var xmlhttp = new XMLHttpRequest();
-		    xmlhttp.onreadystatechange = function() {
-		        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-		            console.log('responseText:' + xmlhttp.responseText);
-		            try {
-		                var data = JSON.parse(xmlhttp.responseText);
-		            } catch(err) {
-		                console.log(err.message + " in " + xmlhttp.responseText);
-		                return;
-		            }
-		            callback(data);
-		        }
-		    };
-		 
-		    xmlhttp.open("GET", url, true);
-		    xmlhttp.send();
-		};
-
-
-
-
-	    let rad=$('[name="kindjokes"]');
-	    let radc=$('[name="ctg"]');
-	    var kind;
-	    var catg;
-
-
-
-	    
-	    	$("#getjoke").click( function() {
-	    		for (var i = 0; i < rad.length; i++) {
-	        		if (rad[i].checked) {
-	            		kind = rad[i].value;
-	            		console.log(kind);
-	            		
-	        		}
-	    		};
-
-	    		if (kind == 'Random') {
-		    		ajax_get('https://api.chucknorris.io/jokes/random', function(data) {
-		    			$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category" </div> </div> </div> </div>');
-		    		});
- 					
- 				};
-
- 				if (kind == 'categories') {
-	    			for (var i = 0; i < radc.length; i++) {
-	        			if (radc[i].checked) {
-	        			    catg = radc[i].value;
-	        			    console.log(catg);
-	        			    console.log(typeof(catg));
-	        			    		
-	        			};
-	    			}; 	    			
-				    	ajax_get('https://api.chucknorris.io/jokes/random?category=' + catg, function(data) {
-				    		$("#data").prepend('<div class="joke">  <div class="joke__like"><div class="joke__heart"> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="' + data.url + '" class="joke__idlink"> ' + data.id + '</a></div>' + data.value + '<div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ' + Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)  + ' hours ago</div> <div class="joke__category">' + catg + ' </div> </div> </div> </div>');
-						    	});
- 						
-	    			
-	    		};
-	    	});
-
-
-
-	
-
-
-    
-  </script>
+<script src="main.js"></script>
 </body>
 </html>
 
