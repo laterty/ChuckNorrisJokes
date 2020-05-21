@@ -12,26 +12,30 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="cont"></div>
-<div class="test">test</div>
-<div class="test">test2</div>
-<button class='bt'>clickme</button>
-
-<script type="text/javascript">
-	
-	$('.test').click(function() {
-		$(this).addClass('joke__id')
-	});
-
-	$('.bt').click(function() {
-		 $('.cont').append('<div class="test" id="test">test3</div>');
-		 $('#test').click(function() {
-		 	$(this).addClass('joke__id');
-		 })
-
-	});
-
-</script>
+<div class="container">
+    <div class="text-center">
+        <button type="button" class="btn btn-demo" data-toggle="modal" data-target="#exampleModal">
+            Left Sidebar Modal
+        </button>
+    </div>
+    <div class="modal left fade" id="exampleModal" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="nav flex-sm-column flex-row">
+                        <a class="nav-item nav-link active" href="#">Home</a>
+                        <a href="#" class="nav-item nav-link">Link</a>
+                        <a href="#" class="nav-item nav-link">Link</a>
+                        <a href="#" class="nav-item nav-link">Link</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 	
 </body>
 </html>
