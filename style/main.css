@@ -38,7 +38,40 @@ body{
 }
 
 .content__radiobtn{
-	
+	position: relative;
+	margin: 0 0 10px 0;
+}
+
+.content__radiobtn input{
+	display: none;
+}
+.content__radiobtn input + label:before{
+	content: '';
+	position: absolute;
+	left:-35px;
+	top:2px;
+	width: 20px;
+	height: 20px;
+	background-image: url(../img/checkbox_empty.svg);
+	cursor: pointer;
+}
+
+.content__radiobtn input:checked + label:before{
+	content: '';
+	position: absolute;
+	left:-35px;
+	top:2px;
+	width: 20px;
+	height: 20px;
+	background-image: url(../img/checkbox_fill.svg);
+}
+
+
+.content__radiobtn label{
+	position: absolute;
+	left:35px;
+	top:0;
+	cursor: pointer;
 }
 
 .content__categories{
@@ -98,7 +131,6 @@ body{
 	color: #333333;
 }
  
-/* Hover */
 .content__btn_ctg label:hover {
 	color: #666;
 }
@@ -209,6 +241,11 @@ body{
 	width: 20px;
 	height: 17px;
 	background-image: url(../img/heart_light.svg);
+	cursor: pointer;
+}
+
+.joke__heart_active{
+	background-image: url(../img/heart_fill.svg);
 }
 
 .joke__heart:hover {

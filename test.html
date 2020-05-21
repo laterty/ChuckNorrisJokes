@@ -12,25 +12,24 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
-
-<input name="r1" type="radio" value="5" > Первый
-<input name="r1" type="radio" value="13"> Второй
-<input name="r1" type="radio" value="53"> Третий
-<br>
-<button class="btn">TEST</button>
+<div class="cont"></div>
+<div class="test">test</div>
+<div class="test">test2</div>
+<button class='bt'>clickme</button>
 
 <script type="text/javascript">
-	var rad=$('[name="r1"]');
-	$('.btn').click(function() {
-    		for (var i=0;i<rad.length; i++) {
-        		if (rad[i].checked) {
-            		console.log(rad[i].value);
-        		}
-    		}
-		});
 	
+	$('.test').click(function() {
+		$(this).addClass('joke__id')
+	});
 
+	$('.bt').click(function() {
+		 $('.cont').append('<div class="test" id="test">test3</div>');
+		 $('#test').click(function() {
+		 	$(this).addClass('joke__id');
+		 })
 
+	});
 
 </script>
 	
