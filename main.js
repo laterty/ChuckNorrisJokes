@@ -5,11 +5,6 @@ let rad=$('[name="kindjokes"]'),
 	catg;
 
 //=================================================================================
-/*$('[name="ctg"], [name="kindjokes"]').change	( event => {
-	const url = new URL(location);
-	url.searchParams.set(event.target.name, event.target.value);
-	history.replaceState(null, null, url);	
-});*/
 $("form").submit(function(e){
     e.preventDefault();
     for (var i = 0; i < rad.length; i++) {
@@ -124,16 +119,38 @@ function I(x) {
 		ajax_get(url1, function(data) {
 			$("#data1").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart joke__heart_active" data-url="${data.url}" id='${data.id}' onclick='I(this)' > </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);		    			
 		});
-	}		
-};
+	}
+};		
 	    
-	    		
-	
-		    		
+function setup_for_width(tabl) {
+	if (tabl.matches) {
+		$('#exampleModal').addClass("modal left fade");
+		$('#exampleModal').removeClass("col-md-4 offset-md-1");
+		$('#test11 ').css('display','flex');
+		$('#exampleModal').css('display','none');
+		$('.favorite').css('width','480px');
+		$('.favorite').css('background','');
+		$('.favorite__btnmenu').css('display','inline-block');
+		$('.modal-content').css('padding','40px');
+		$('.favorite__favorite').css('justify-content','flex-end');
+	} else {
+		$('#exampleModal').css('display','block');
+		$('#exampleModal').addClass("col-md-4 offset-md-1");
+		$('#exampleModal').removeClass("modal left fade");
+		$('#test11 ').css('display','none');
+		$('.favorite').css('width','');
+		$('.favorite__btnmenu').css('display','none');
+		$('.favorite').css('background','#f8f8f8');
+		$('.modal-content').css('padding','');
+		$('.favorite__favorite').css('justify-content','flex-start');
 
 
+	}
+};
 
+var tabl = window.matchMedia("screen and (max-width: 768px)");
+var phon = window.matchMedia("screen and (min-width: 576px)");
 
-	
-	    		
+tabl.addListener(setup_for_width); // Добавим прослушку на смену результата
 
+setup_for_width(tabl); // Вызовем нашу функцию

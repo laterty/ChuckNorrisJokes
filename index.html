@@ -17,8 +17,16 @@
 <body>
 	<div class="container-fluid">
 		<div class="row content__row">
-			<div class="content col-6 offset-1">
-				<div class="content__headername" >MSI2020</div>
+			<div class="content col-md-6 col-12 offset-md-1" >
+				<div class="content__header">
+					<div class="content__headername" >MSI2020</div>
+					
+					<div class="content__favorite" id="test11">
+						<button type="button" class="content__btnmenu" data-toggle="modal" data-target="#exampleModal"></button>
+						<div class="content__favorite_text">Favorite</div>	
+					</div>
+				</div>
+				
 				<div class="content__title">Hey!</div>
 				<div class="content__subtitle">Let's try to find a joke for you:</div>
 				<form action="#" id="form1">
@@ -108,11 +116,21 @@
 				</form>
 				<div id="data">	</div>
 			</div>
-			<div class="favorite col-4 offset-1">
-				<div class="favorite__headername">Favorite</div>
-				<div class="favorite__container" id="data1"></div> 
-				
+			
+    		<div class="col-md-4 offset-md-1 favorite" id="exampleModal" tabindex="" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        		<div class="modal-dialog" role="document">
+            		<div class="modal-content">
+            			<div class=" favorite__favorite">
+							<button type="button" class="favorite__btnmenu" data-dismiss="modal" data-target="#exampleModal"></button>
+							<div class="content__favorite_text">Favorite</div>	
+						</div>
+						<div class="favorite__container" id="data1"></div>
+        			</div>
+    			</div>
 			</div>
+				
+				
+
 		</div>
 	</div>
 

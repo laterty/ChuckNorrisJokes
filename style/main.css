@@ -7,6 +7,7 @@ body{
 
 .content__row{
 	height: 100vh;
+	
 
 }
 
@@ -16,14 +17,49 @@ body{
 
 .content{
 	min-height: 100%;
+	padding: 40px;
+
+}
+
+.content__header{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: space-between;
 }
 
 .content__headername{
 	font-weight: bold;
 	font-size: 20px;
 	line-height: 28px;
-	margin: 12px 0 50px 0;
+	margin: 0 0 50px 0;
 }
+
+.content__favorite_text{
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 28px;
+	color: #ABABAB;
+	margin-left: 10px;
+}
+
+
+.content__btnmenu{
+	width: 28px;
+	height: 28px;
+	background: #fff;
+	background-image: url(../img/menuicon_open.svg);
+	border-right: 50%;
+}
+
+
+
+.content__favorite{
+	display: none;
+}
+
 .content__title{
 	font-weight: bold;
 	font-size: 32px;
@@ -267,18 +303,17 @@ body{
 
 
 .favorite{
-	background: #F8F8F8;
+	
 }
 
 .favorite__headername {
 	font-weight: 500;
 	font-size: 20px;
-	line-height: 28px;
 	color: #ABABAB;
-	margin: 12px 0 0 0;
+	
 }
 
-/*===============================TEST==========================================*/
+/* ----- MODAL STYLE ----- */
 .modal.left .modal-dialog {
 	position:fixed;
 	right: 0;
@@ -296,32 +331,29 @@ body{
 	overflow-y: auto;
 }
 
-.modal.right .modal-body {
-	padding: 15px 15px 80px;
-}
 
-.modal.right.fade .modal-dialog {
-	left: -320px;
-	-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-	-moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-	-o-transition: opacity 0.3s linear, left 0.3s ease-out;
-	transition: opacity 0.3s linear, left 0.3s ease-out;
-}
 
-.modal.right.fade.show .modal-dialog {
-	right: 0;
-}
 
-/* ----- MODAL STYLE ----- */
 .modal-content {
 	border-radius: 0;
 	border: none;
-}
-
-.modal-header {
-	border-bottom-color: #eeeeee;
-	background-color: #fafafa;
+	background: #F8F8F8;
+	max-width: 480px;
 }
 
 
- 
+.modal-dialog {}
+
+.favorite__favorite {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.favorite__btnmenu{
+	width: 28px;
+	height: 28px;
+	background: #f8f8f8;
+	border-right: 50%;
+	background-image: url(../img/menuicon_close.svg)
+}
+.favorite__container {}
