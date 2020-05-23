@@ -1,8 +1,16 @@
 let rad=$('[name="kindjokes"]'),
 	radc=$('[name="ctg"]'),
 	favoriteArray = localStorage.getItem('fav'),
+	jokes = {},
 	kind,
 	catg;
+
+
+
+for (let i = 0, length = localStorage.length,jk; i < length; i++) {
+	jk = JSON.parse(localStorage.getItem(localStorage.key(i)));
+	$("#data1").prepend(`<div class="favjoke" name = "${jk.id}">  <div class="joke__like"><div class="joke__heart joke__heart_active"  data-idfav='${jk.id}' onclick='O(this)' > </div> </div> <div class="favjoke__container"> <div class="joke__id"> ID: <a href="  ${jk.url} " class="joke__idlink"> ${jk.id} </a></div> <div class="joke__text"> ${jk.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(jk.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
+}
 
 //=================================================================================
 $("form").submit(function(e){
@@ -19,10 +27,11 @@ $("form").submit(function(e){
 		    method: 'GET',
 		    dataType: 'json',
 		    success: function(data){ 
-		      $("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" data-url="${data.url}" id='${data.id}' onclick='I(this)' > </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
-		      console.log(data)
+		      $("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart"  id='${data.id}' onclick='I(this)' > </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
+		      console.log(data);
+		      jokes[data.id] = data; 
 		    },
-		    error: function(data){ //error function
+		    error: function(data){ 
 		      console.log(data)
 		    }
   		});
@@ -39,10 +48,11 @@ $("form").submit(function(e){
 		    method: 'GET',
 		    dataType: 'json',
 		    success: function(data){ 
-		      $("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" data-url="${data.url}" onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href=" ${data.url} " class="joke__idlink">   ${data.id} </a></div>  ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div> <div class="joke__category"> ${catg} </div> </div> </div> </div>`);
-		      console.log(data)
+		      $("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" id='${data.id}' onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href=" ${data.url} " class="joke__idlink">   ${data.id} </a></div>  ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div> <div class="joke__category"> ${catg} </div> </div> </div> </div>`);
+		      console.log(data);
+		      jokes[data.id] = data;
 		    },
-		    error: function(data){ //error function
+		    error: function(data){ 
 		      console.log(data)
 		    }
   		});
@@ -57,10 +67,11 @@ $("form").submit(function(e){
 			    success: function(data){ 
 			    	let count = Math.floor(Math.random() * data.total);
 			    	let joke = data.result[count];
-			    	$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" data-url="${joke.url}" onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${joke.url} " class="joke__idlink"> ${joke.id} </a></div> ${joke.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(joke.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
-			    	console.log(data)
+			    	$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" id='${joke.id}' onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${joke.url} " class="joke__idlink"> ${joke.id} </a></div> ${joke.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(joke.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
+			    	console.log(data);
+			    	jokes[joke.id] = joke;
 			    },
-			    error: function(data){ //error function
+			    error: function(data){ 
 			      console.log(data)
 			    }
   			});
@@ -73,6 +84,8 @@ $("form").submit(function(e){
 
 });
 //=================================================================================
+
+
 
 $('#random').click(function(){
 	$('.content__search').css('display', 'none');
@@ -111,19 +124,37 @@ function ajax_get(url, callback) {
 
 
 function I(x) {
+	let jk = jokes[x.getAttribute('id')],
+		jkid = jk.id;
 	if (x.classList.contains('joke__heart_active')) {
 		$(x).removeClass('joke__heart_active');
+		$(`[name =${jkid}]`).remove();
+		localStorage.removeItem(`${jkid}`);
 	} else {
-		$(x).addClass('joke__heart_active');
-		let 	url1 = x.dataset.url;
-		ajax_get(url1, function(data) {
-			$("#data1").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart joke__heart_active" data-url="${data.url}" id='${data.id}' onclick='I(this)' > </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);		    			
-		});
+		$(x).addClass('joke__heart_active');	
+		$("#data1").prepend(`<div class="favjoke" name = "${jkid}">  <div class="joke__like"><div class="joke__heart joke__heart_active"  data-idfav='${jk.id}' onclick='O(this)' > </div> </div> <div class="favjoke__container"> <div class="joke__id"> ID: <a href="  ${jk.url} " class="joke__idlink"> ${jk.id} </a></div> <div class="joke__text"> ${jk.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(jk.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);		    			
+		localStorage.setItem(`${jkid}`, JSON.stringify(jk));
 	}
-};		
+};	
+
+function O(x){
+	let ids = x.dataset.idfav;
+	$(`[name =${ids}]`).remove();
+	$(`#${ids}`).removeClass('joke__heart_active');
+	localStorage.removeItem(`${ids}`);
+}	
+
+function delfavjoke(id) {
+	for (let i = 0; i < favjokess.length; i++) {
+		if (id == favjokess[i].id) {
+			favjokess.splice(i,1);
+			break
+		}
+	}
+}
 	    
-function setup_for_width(tabl) {
-	if (tabl.matches) {
+function setup_for_width(x) {
+	if (x.matches) {
 		$('#exampleModal').addClass("modal left fade");
 		$('#exampleModal').removeClass("col-md-4 offset-md-1");
 		$('#test11 ').css('display','flex');
@@ -148,9 +179,11 @@ function setup_for_width(tabl) {
 	}
 };
 
-var tabl = window.matchMedia("screen and (max-width: 768px)");
-var phon = window.matchMedia("screen and (min-width: 576px)");
+var tabl = window.matchMedia("screen and (max-width: 767px)");
+// var phon = window.matchMedia("screen and (min-width: 576px)");
+
+setup_for_width(tabl);
 
 tabl.addListener(setup_for_width); // Добавим прослушку на смену результата
 
-setup_for_width(tabl); // Вызовем нашу функцию
+ // Вызовем нашу функцию
