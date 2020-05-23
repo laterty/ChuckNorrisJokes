@@ -231,7 +231,7 @@ body{
 }
 
 .joke__text{
-	wax-width:100%;
+	overflow-wrap: break-word;
 }
 
 .joke__idlink::after{

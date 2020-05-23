@@ -1,18 +1,19 @@
-let rad=$('[name="kindjokes"]'),
-	radc=$('[name="ctg"]'),
-	favoriteArray = localStorage.getItem('fav'),
-	jokes = {},
+let rad=$('[name="kindjokes"]'),//to know what way to get a joke was chosen
+	radc=$('[name="ctg"]'), //to know what category was chosen
+	jokes = {}, //jokes on the page exept favorites
+	favjokes = {}, // key = id of fav.joke, value = true
 	kind,
 	catg;
 
 
-
+// =================================display favjokes after reloading=======================================================================
 for (let i = 0, length = localStorage.length,jk; i < length; i++) {
 	jk = JSON.parse(localStorage.getItem(localStorage.key(i)));
 	$("#data1").prepend(`<div class="favjoke" name = "${jk.id}">  <div class="joke__like"><div class="joke__heart joke__heart_active"  data-idfav='${jk.id}' onclick='O(this)' > </div> </div> <div class="favjoke__container"> <div class="joke__id"> ID: <a href="  ${jk.url} " class="joke__idlink"> ${jk.id} </a></div> <div class="joke__text"> ${jk.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(jk.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
+	favjokes[jk.id] = true;
 }
 
-//=================================================================================
+//=============================GETJOKE====================================================
 $("form").submit(function(e){
     e.preventDefault();
     for (var i = 0; i < rad.length; i++) {
@@ -27,14 +28,16 @@ $("form").submit(function(e){
 		    method: 'GET',
 		    dataType: 'json',
 		    success: function(data){ 
-		      $("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart"  id='${data.id}' onclick='I(this)' > </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
-		      console.log(data);
-		      jokes[data.id] = data; 
+		    	$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart"  id='${data.id}' onclick='I(this)' > </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${data.url} " class="joke__idlink"> ${data.id} </a></div> <div class="joke__text"> ${data.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
+		     	console.log(data);
+		    	jokes[data.id] = data;
+				if (favjokes[data.id]) {$(`#${data.id}`).addClass('joke__heart_active')}; 
 		    },
 		    error: function(data){ 
 		      console.log(data)
 		    }
   		});
+  		
 	};
 
 	if (kind == 'categories') {
@@ -48,14 +51,16 @@ $("form").submit(function(e){
 		    method: 'GET',
 		    dataType: 'json',
 		    success: function(data){ 
-		      $("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" id='${data.id}' onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href=" ${data.url} " class="joke__idlink">   ${data.id} </a></div>  ${data.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data.updated_at))/3600000)}  hours ago</div> <div class="joke__category"> ${catg} </div> </div> </div> </div>`);
-		      console.log(data);
-		      jokes[data.id] = data;
+		    	$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" id='${data.id}' onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href=" ${data.url} " class="joke__idlink">   ${data.id} </a></div> <div class="joke__text">  ${data.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(data['updated_at']))/3600000)}  hours ago</div> <div class="joke__category"> ${catg} </div> </div> </div> </div>`);
+		      		console.log(data);
+		      		jokes[data.id] = data;
+					if (favjokes[data.id]) {$(`#${data.id}`).addClass('joke__heart_active')};		      
 		    },
 		    error: function(data){ 
 		      console.log(data)
 		    }
   		});
+  		
 	   	
 	};
 
@@ -67,23 +72,20 @@ $("form").submit(function(e){
 			    success: function(data){ 
 			    	let count = Math.floor(Math.random() * data.total);
 			    	let joke = data.result[count];
-			    	$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" id='${joke.id}' onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${joke.url} " class="joke__idlink"> ${joke.id} </a></div> ${joke.value} <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(joke.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
-			    	console.log(data);
+			    	$("#data").prepend(`<div class="joke">  <div class="joke__like"><div class="joke__heart" id='${joke.id}' onclick='I(this)'> </div> </div> <div class="joke__container"> <div class="joke__id"> ID: <a href="  ${joke.url} " class="joke__idlink"> ${joke.id} </a></div> <div class="joke__text"> ${joke.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(joke.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);
 			    	jokes[joke.id] = joke;
+			    	if (favjokes[joke.id]) {$(`#${joke.id}`).addClass('joke__heart_active')}; 
+
 			    },
 			    error: function(data){ 
 			      console.log(data)
 			    }
   			});
-			
-	};	
+		
+	};
 
-	
-
-  
-
-});
-//=================================================================================
+});	
+//==================================controles how forms are displayed ===============================================
 
 
 
@@ -102,25 +104,7 @@ $('#search').click(function(){
 	$('.content__categories').css('display', 'none');
 });
 
-
-function ajax_get(url, callback) {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-	        console.log('responseText:' + xmlhttp.responseText);
-	        try {
-		        var data = JSON.parse(xmlhttp.responseText);
-	        } catch(err) {
-		        console.log(err.message + " in " + xmlhttp.responseText);
-		    	return;
-		    }
-		    callback(data);
-		}
-	};
-		 
-	xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-};
+// ==================================callback listener for jokes hearts exept favorites================================================
 
 
 function I(x) {
@@ -130,28 +114,24 @@ function I(x) {
 		$(x).removeClass('joke__heart_active');
 		$(`[name =${jkid}]`).remove();
 		localStorage.removeItem(`${jkid}`);
+		delete favjokes[jkid];
 	} else {
 		$(x).addClass('joke__heart_active');	
 		$("#data1").prepend(`<div class="favjoke" name = "${jkid}">  <div class="joke__like"><div class="joke__heart joke__heart_active"  data-idfav='${jk.id}' onclick='O(this)' > </div> </div> <div class="favjoke__container"> <div class="joke__id"> ID: <a href="  ${jk.url} " class="joke__idlink"> ${jk.id} </a></div> <div class="joke__text"> ${jk.value} </div> <div class="joke__bottomrow"><div class="joke__timeupdated"> Last update: ${Math.floor((Date.now() - Date.parse(jk.updated_at))/3600000)}  hours ago</div>  </div> </div> </div>`);		    			
 		localStorage.setItem(`${jkid}`, JSON.stringify(jk));
+		favjokes[jkid] = true;
 	}
 };	
-
+//================================callback listener for favorite jokes hearts=================================================
 function O(x){
 	let ids = x.dataset.idfav;
 	$(`[name =${ids}]`).remove();
 	$(`#${ids}`).removeClass('joke__heart_active');
 	localStorage.removeItem(`${ids}`);
+	delete favjokes[ids];
 }	
 
-function delfavjoke(id) {
-	for (let i = 0; i < favjokess.length; i++) {
-		if (id == favjokess[i].id) {
-			favjokess.splice(i,1);
-			break
-		}
-	}
-}
+//===============================adaptive======================================================
 	    
 function setup_for_width(x) {
 	if (x.matches) {
