@@ -133,37 +133,55 @@ function O(x){
 
 //===============================adaptive======================================================
 	    
+
+
 function setup_for_width(x) {
 	if (x.matches) {
 		$('#exampleModal').addClass("modal left fade");
-		$('#exampleModal').removeClass("col-md-4 offset-md-1");
+		$('#exampleModal').removeClass("col-lg-4 offset-lg-1");
 		$('#test11 ').css('display','flex');
 		$('#exampleModal').css('display','none');
 		$('.favorite').css('width','480px');
 		$('.favorite').css('background','');
 		$('.favorite__btnmenu').css('display','inline-block');
-		$('.modal-content').css('padding','40px');
 		$('.favorite__favorite').css('justify-content','flex-end');
+		// $('.modal-content').css('padding','40px');
+		
 	} else {
 		$('#exampleModal').css('display','block');
-		$('#exampleModal').addClass("col-md-4 offset-md-1");
+		$('#exampleModal').addClass("col-lg-4 offset-lg-1");
 		$('#exampleModal').removeClass("modal left fade");
 		$('#test11 ').css('display','none');
 		$('.favorite').css('width','');
 		$('.favorite__btnmenu').css('display','none');
 		$('.favorite').css('background','#f8f8f8');
-		$('.modal-content').css('padding','');
 		$('.favorite__favorite').css('justify-content','flex-start');
+		// $('.modal-content').css('padding',' 15px 25px');
 
 
-	}
+	};
+	
 };
 
-var tabl = window.matchMedia("screen and (max-width: 767px)");
-// var phon = window.matchMedia("screen and (min-width: 576px)");
+// function mobview (x) {
+// 	if (x.matches) {
+// 		// $('.modal-content').css('padding','40px 20px');
+// 		$('.joke').css('padding', '20px 20px 20px 80px');
+// 	} else {
+// 		// $('.modal-content').css('padding','40px');
+// 		$('.joke').css('padding', '40px 40px 40px 100px');		
+// 	};
+// };
 
+var tabl = window.matchMedia("screen and (max-width: 991px)");
+// var mob = window.matchMedia("screen and (max-width: 576px)");
+
+// mobview(mob);
 setup_for_width(tabl);
 
+
+// mob.addListener(mobview);
 tabl.addListener(setup_for_width); // Добавим прослушку на смену результата
 
- // Вызовем нашу функцию
+
+
